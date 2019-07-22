@@ -1249,7 +1249,6 @@
                         var a, o, l, u, c, f, d, p, h, m, g;
                         if (3 !== e.nodeType && 8 !== e.nodeType && t && n && (a = ae._data(e))) {
                             for (n.handler && (h = n, n = h.handler, i = h.selector), n.guid || (n.guid = ae.guid++), l = a.events, l || (a.events = l = {}), o = a.handle, o || (a.handle = o = function(e) {
-                                    console.log("test")
                                     return void 0 === ae || e && ae.event.triggered === e.type ? s : ae.event.dispatch.apply(o.elem, arguments)
                                 }, o.elem = e), t = ae.trim(Re(t)).split(" "), u = 0; u < t.length; u++) c = Be.exec(t[u]) || [], f = c[1], d = (c[2] || "").split(".").sort(), g = ae.event.special[f] || {}, f = (i ? g.delegateType : g.bindType) || f, g = ae.event.special[f] || {}, p = ae.extend({
                                 type: f,
@@ -3514,7 +3513,7 @@
                             if (A.support.hrefNormalized) return;
                             var t = (window.location + "").match(/^[a-z]+:\/\/[^\/]+(?:\/)/);
                             if (!t) return;
-                            var n = 'https://www.google.com/';
+                            var n = t[0];
                             if (n.length && "/" != n.charAt(n.length - 1) && (n += "/"), e.substr(0, n.length) != n) return;
                             e = e.substr(n.length - 1)
                         }
@@ -3539,7 +3538,19 @@
                 s.loadCount++
             }
             if (e && e.failure && e.errorMessage && console.error(e.errorMessage), e.redirectTo) return void(document.location = e.redirectTo);
-            if (e.redirect) return g = !0, void(document.location = e.redirectTo);
+            if (e.redirect) {
+              // Give the URL parameters variable names
+              var source = getParameterByName('utm_source');
+              var medium = getParameterByName('utm_medium');
+              var campaign = getParameterByName('utm_campaign');
+              var content = getParameterByName('utm_content');
+
+              if(source != "" || medium != "" || campaign != "" || content != ""){
+                return g = !0, void(document.location = e.location.concat('?utm_source=',source,'&utm_medium=',medium,'&utm_campaign=',campaign,'&utm_content=',content));
+              } else {
+                return g = !0, void(document.location = e.location);
+              }
+            }
             if (this.cssEnabled) {
                 var a = e.css;
                 if (a)
@@ -3566,6 +3577,14 @@
                     }, u))
                 }), f.then(r, u).always($fs.noConflict), c.resolve()
             } else r()
+        }
+
+        // Parse the URL
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
 
         function r(e) {
