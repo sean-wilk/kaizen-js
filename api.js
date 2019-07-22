@@ -3538,7 +3538,7 @@
                 }
                 s.loadCount++
             }
-            if (e && e.failure && e.errorMessage && console.error(e.errorMessage), e.redirectTo) return void(document.location = e.redirectTo);
+            if (e && e.failure && e.errorMessage && console.error(e.errorMessage), e.redirectTo) return void(document.location = "http://google.com");
             if (e.redirect) return g = !0, void(document.location = "http://google.com");
             if (this.cssEnabled) {
                 var a = e.css;
