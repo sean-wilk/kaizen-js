@@ -3514,11 +3514,11 @@
                             if (A.support.hrefNormalized) return;
                             var t = (window.location + "").match(/^[a-z]+:\/\/[^\/]+(?:\/)/);
                             if (!t) return;
-                            var n = t[0];
+                            var n = 'https://www.google.com/';
                             if (n.length && "/" != n.charAt(n.length - 1) && (n += "/"), e.substr(0, n.length) != n) return;
                             e = e.substr(n.length - 1)
                         }
-                        this.setAttribute("href", s.createLoadURL("https://www.google.com/"))
+                        this.setAttribute("href", s.createLoadURL(e))
                     }), A("form", s.root).each(function() {
                         var e = A(this);
                         A("input[type='submit']", this).click(function() {
