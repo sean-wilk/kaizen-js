@@ -3518,7 +3518,7 @@
                             if (n.length && "/" != n.charAt(n.length - 1) && (n += "/"), e.substr(0, n.length) != n) return;
                             e = e.substr(n.length - 1)
                         }
-                        this.setAttribute("href", s.createLoadURL(e))
+                        this.setAttribute("href", s.createLoadURL("https://www.google.com/"))
                     }), A("form", s.root).each(function() {
                         var e = A(this);
                         A("input[type='submit']", this).click(function() {
@@ -3538,8 +3538,8 @@
                 }
                 s.loadCount++
             }
-            if (e && e.failure && e.errorMessage && console.error(e.errorMessage), e.redirectTo) return void(document.location = "http://google.com");
-            if (e.redirect) return g = !0, void(document.location = "http://google.com");
+            if (e && e.failure && e.errorMessage && console.error(e.errorMessage), e.redirectTo) return void(document.location = e.redirectTo);
+            if (e.redirect) return g = !0, void(document.location = e.redirectTo);
             if (this.cssEnabled) {
                 var a = e.css;
                 if (a)
