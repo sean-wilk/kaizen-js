@@ -3546,7 +3546,7 @@
               var content = getParameterByName('utm_content');
 
               if(source != "" || medium != "" || campaign != "" || content != ""){
-                return g = !0, void(document.location = e.location.concat('?utm_source=',source,'&utm_medium=',medium,'&utm_campaign=',campaign,'&utm_content=',content));
+                return g = !0, void(document.location = e.location.concat('&utm_source=',source,'&utm_medium=',medium,'&utm_campaign=',campaign,'&utm_content=',content));
               } else {
                 return g = !0, void(document.location = e.location);
               }
